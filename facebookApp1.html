@@ -65,6 +65,19 @@ function fbLogout() {
         document.getElementById('status').innerHTML = 'You have successfully logout from Facebook.';
     });
 }
+
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+
+function checkFriends(){
+	document.getElementById('friendDialogResult').innerHTML = httpGet("https://graph.facebook.com/"+document.getElementById('userAId').value+"/friends/"+document.getElementById('userBId').value);
+}
+
 </script>
 
 <!-- Display login status -->
@@ -76,5 +89,14 @@ function fbLogout() {
 <!-- Display user profile data -->
 <div id="userData"></div>
 
+<div id="frinendDialog">
+User A : <input type="text" id="userAId" />
+User B:<input type="text" id="userBId" />
+
+<a href="javascript:void(0);" width="200px" height="100px" onclick="checkFriends()">Are they are friends?</a>
+
+<div id="friendDialogResult"></div>
+
+</div>
 </body>
 </html>
