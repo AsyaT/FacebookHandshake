@@ -75,7 +75,11 @@ function httpGet(theUrl)
 }
 
 function checkFriends(){
-	document.getElementById('friendDialogResult').innerHTML = httpGet("https://graph.facebook.com/"+document.getElementById('userAId').value+"/friends/"+document.getElementById('userBId').value);
+	var responseAccessToken = httpGet("https://graph.facebook.com/oauth/access_token?client_id="+"461022797321167"+"&client_secret="+"01e9ff17883c55a17f727d60e61b4fbd"+"&grant_type=client_credentials");
+	
+	var accessTokenResult = JSON.parse(responseAccessToken);
+
+	document.getElementById('friendDialogResult').innerHTML = httpGet("https://graph.facebook.com/"+document.getElementById('userAId').value+"/friends/"+document.getElementById('userBId').value+"?access_token="+accessTokenResult.access_token);
 }
 
 </script>
